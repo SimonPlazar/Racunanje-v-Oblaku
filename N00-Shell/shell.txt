@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Ustvari Dockerfile
+echo "Ustvarjam Dockerfile"
+echo "FROM alpine:latest" > Dockerfile
+echo "RUN apk update && apk add openssh-server" >> Dockerfile
+echo "EXPOSE 22" >> Dockerfile
+echo "ENTRYPOINT [\"/usr/sbin/sshd\", \"-D\"]" >> Dockerfile
+
+# Ustvari inner-shell.sh
+echo "Ustvarjam inner-shell.sh"
+echo "#!/bin/bash" > inner-shell.sh
+echo "sudo docker build -t alpine-ssh ." >> inner-shell.sh
+echo "echo \"Done: step 1.\"" >> inner-shell.sh
+
+# Naredi inner-shell.sh izvršljivo
+chmod +x inner-shell.sh
+
+# Zaženi inner-shell.sh
+./inner-shell.sh
+
+: `
+Izvajanje program
+simon@TristanUbntVM:~/Desktop/Shell$ time bash shell.txt 
+Ustvarjam Dockerfile
+Ustvarjam inner-shell.sh
+sudo: docker: command not found
+Done: step 1.
+
+real	0m0.087s
+user	0m0.039s
+sys	0m0.049s
+
+ 1 Procesi
+1 ps  
+   Prikazuje seznam procesov  
+   ps aux
+
+2 top  
+   Prikazuje dinamičen seznam procesov
+   top
+
+3 kill  
+   Konča proces s specifično ID številko (PID)  
+   kill <PID>
+
+ 2 Datoteke
+1 ls  
+   Prikazuje vse datoteke in mape v trenutnem direktoriju  
+   ls -l
+
+2 cp  
+   Kopira datoteko ali direktorij  
+   cp src dest
+
+3 rm  
+   Briše datoteko ali direktorij
+   rm -rf folder_name
+
+ 3 Programiranje (računanje na CPE)
+1 gcc  
+   Prevede C program
+   gcc programc -o program
+
+2 /program  
+   Zažene izvršljivo datoteko 
+   /program
+
+3 make  
+   Uporabi Makefile za avtomatizacijo
+   make
+
+`
